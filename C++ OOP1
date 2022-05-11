@@ -1,0 +1,70 @@
+#include<iostream>
+
+using namespace std;
+
+class Sinhvien{
+	private:
+		int n;
+		char MSV[20], hoten[30], truong[50];
+		float dToan, dLy, dHoa, dTong;
+		public:
+			int nhap();
+			int sapxep();
+};
+Sinhvien s, a[10];
+int Sinhvien::nhap(){
+	do{
+		cout<<"Nhap vao so luong sinh vien: ";
+		cin>>n;
+	}
+	while(n<=0);
+	int i;
+	for(int i=1;i<=n;i++){
+		cout<<"Nhap vao sinh vien thu "<<i<<endl;
+		cin.ignore(1);
+		cout<<"Nhap MSV: ";
+		cin.getline(s.MSV,20);
+		cout<<"Nhap ho ten: ";
+		cin.getline(s.hoten,30);
+		cout<<"Nhap ten truong: ";
+		cin.getline(s.truong,50);
+		cout<<"Nhap diem Toan: ";
+		cin>>s.dToan;
+		cout<<"Nhap diem Ly: ";
+		cin>>s.dLy;
+		cout<<"Nhap diem Hoa: ";
+		cin>>s.dHoa;
+		cout<<"________________________________________"<<endl;
+		s.dTong = s.dToan + s.dLy + s.dHoa;
+		a[i] = s;
+	}
+}
+int Sinhvien::sapxep(){
+	int i,j;
+	for(int i=1;i<=n;i++){
+		for(int j=i+1;j<n;j++){
+			if(a[i].dTong < a[j].dTong){
+				s = a[i];
+				a[i] = a[j];
+				a[j] = s;
+			}
+		}
+	}
+	cout<<"Sap xep theo thu tu diem giam dan la: "<<endl;
+	for(int i =1;i<=n;i++){
+	s=a[i];
+	cout<<"MSV: "<<s.MSV<<endl;
+	cout<<"Ho ten: "<<s.hoten<<endl;
+	cout<<"Truong: "<<s.truong<<endl;
+	cout<<"Diem Toan: "<<s.dToan<<endl;
+	cout<<"Diem Ly: "<<s.dLy<<endl;
+	cout<<"Diem Hoa: "<<s.dHoa<<endl;
+	cout<<"Tong diem "<<s.dTong<<endl;
+	cout<<"________________________________________"<<endl;
+}
+}
+
+int main(){
+	s.nhap();
+	s.sapxep();
+}
